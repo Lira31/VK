@@ -1,0 +1,22 @@
+def cache_deco(func):
+    cache = {}
+
+    def inner(*args, **kwargs):
+        key = str(args) + str(kwargs)
+        if key not in cache:
+            cache[key] = func(*args, **kwargs)
+        return cache[key]
+
+    return inner
+
+
+def solution(func_map, func_filter, data):
+    filtered_data = filter(func_filter, data)
+    mapped_data = map(func_map, filtered_data)
+    return (item for i, item in enumerate(mapped_data) if i % 2 == 0)
+
+code = []
+while data := input():
+    code.append(data)
+code = "\n".join(code)
+exec(code)
